@@ -23,17 +23,32 @@ const userController = {
             })
 
             // save mongodb
-            await newUser.save((data) => {
+            await newUser.save()
+                .then(data => {
+                    return res.status(200).json({
+                        message: 'Register Berhasil',
+                        result: data
+                    })
+                })
+    
+        } catch (error) {
+            return res.status(403).json({ message: error.message })
+        }
+    },
+    getUser: async (req, res) => {
+        try {
+            User.find()
+            .then(data => {
                 return res.status(200).json({
-                    message: 'Register Berhasil',
+                    message: 'Success !!!',
                     result: data
                 })
             })
 
-        } catch (error) {
-            return res.status(403).json({ message: error.message })
+        } catch (err) {
+            return res.status(403).json({ message: err.message })
         }
-    }
+    },
 }
 
 module.exports = userController

@@ -34,7 +34,7 @@ app.use('/api', require('./routes/userRoute'))
 
 //default endpoint
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('Rest Api Jams Logistics')
 })
 
 app.listen(process.env.PORT, (req, res) => {
