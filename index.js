@@ -30,7 +30,8 @@ app.use(bodyParser.json()); // to support JSON-encode bodies
 app.use(cors());
 
 //routes endpoint
-app.use('/api', require('./routes/userRoute'))
+app.use('/api', require('./routes/auth'))
+app.use('/api', require('./routes/admin/auth'))
 
 //default endpoint
 app.get('/', (req, res) => {

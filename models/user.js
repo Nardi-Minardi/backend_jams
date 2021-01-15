@@ -31,7 +31,7 @@ const userSchema = new mongoose.Schema({
         unique: true,
         lowercase: true,
     },
-    hashPassword: {
+    password: {
         type: String,
         required: true,
     },
@@ -50,16 +50,11 @@ const userSchema = new mongoose.Schema({
     timestamps: true,
 });
 
-userSchema.virtual('password')
-.set(function(password) {
-    this.hashPassword = bcrypt.hashSync(password, 10);
+//create function automatic for fullname
+userSchema.virtual('fullName')
+.get(function(){
+    return `${this.firstName} ${this.lastName}`;
 });
-
-userSchema.methods = {
-    authenticate: function(){
-        return bcrypt.compareSync(password, this.hashPassword);
-    }
-}
 
 
 module.exports = mongoose.model('User', userSchema);
